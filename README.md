@@ -1,4 +1,4 @@
-# {{ name }}
+# 尚医通前端
 
 > {{ description }}
 

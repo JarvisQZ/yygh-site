@@ -88,7 +88,7 @@
             <span class="item v-link clickable dark">内科 </span>
             <span class="item v-link clickable dark">神经外科 </span>
             <span class="item v-link clickable dark">妇科 </span>
-            <span class="item v-link clickable dark"> 产科 </span>
+            <span class="item v-link clickable dark">产科 </span>
             <span class="item v-link clickable dark">儿科 </span>
           </div>
         </div>
