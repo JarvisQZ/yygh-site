@@ -42,4 +42,11 @@ export default {
       method: "get",
     });
   },
+  //根据排班表id获取排班数据
+  getSchedule(id) {
+    return request({
+      url: `${api_name}/getSchedule/${id}`,
+      method: "get",
+    });
+  },
 };
