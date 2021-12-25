@@ -204,9 +204,28 @@ export default {
           this.dialogPayVisible = false;
           this.message.error("支付错误");
         } else {
-          //TODO
+          //每隔三秒调用查询支付状态接口
+          this.timer = setInterval(() => {
+            this.queryPayStatus(this.orderId);
+          }, 3000);
         }
       });
+    },
+    //查询支付状态的方法
+    queryPayStatus(orderId) {
+      weixinApi.queryPayStatus(orderId).then((response) => {
+        if (response.message === "支付中") {
+          return;
+        }
+        //清除定时器的效果
+        clearInterval(this.timer);
+        window.location.reload();
+      });
+    },
+    closeDialog() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
     },
     init() {
       orderInfoApi.getOrders(this.orderId).then((response) => {
