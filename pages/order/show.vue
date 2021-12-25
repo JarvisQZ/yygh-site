@@ -152,7 +152,7 @@
         <div class="operate-view" style="height: 350px">
           <div class="wrapper wechat">
             <div>
-              <img src="images/weixin.jpg" alt="" />
+              <qriously :value="payObj.codeUrl" :size="220" />
 
               <div
                 style="
@@ -176,6 +176,8 @@
 import "~/assets/css/hospital_personal.css";
 import "~/assets/css/hospital.css";
 import orderInfoApi from "@/api/orderInfo";
+import weixinApi from "@/api/weixin";
+
 export default {
   data() {
     return {
@@ -193,6 +195,19 @@ export default {
     this.init();
   },
   methods: {
+    pay() {
+      //支付二维码弹框进行显示
+      this.dialogPayVisible = true;
+      weixinApi.createNative(this.orderId).then((response) => {
+        this.payObj = response.data;
+        if (this.payObj.codeUrl === "") {
+          this.dialogPayVisible = false;
+          this.message.error("支付错误");
+        } else {
+          //TODO
+        }
+      });
+    },
     init() {
       orderInfoApi.getOrders(this.orderId).then((response) => {
         console.log(response.data);
@@ -207,20 +222,25 @@ export default {
   padding-left: 0;
   padding-top: 0;
 }
+
 .content-wrapper {
   color: #333;
   font-size: 14px;
   padding-bottom: 0;
 }
+
 .bottom-wrapper {
   width: 100%;
 }
+
 .button-wrapper {
   margin: 0;
 }
+
 .el-form-item {
   margin-bottom: 5px;
 }
+
 .bottom-wrapper .button-wrapper {
   margin-top: 0;
 }
